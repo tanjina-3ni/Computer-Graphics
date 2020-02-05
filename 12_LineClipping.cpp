@@ -64,6 +64,52 @@ void window(int Xmin, int Ymin, int Xmax, int Ymax, int xm, int ym){
     line(Xmin,Ymax,Xmax,Ymax);*/
 }
 
+
+
+void RegionCode(int X, int Y, int Xmin, int Ymin, int Xmax, int Ymax){
+
+    string b1,b2,b3,b4,code;
+    bool c;
+    int a;
+    a=Y-Ymax;
+    if(a>0)
+        b1='1';
+    else
+        b1='0';
+
+    a=Ymin-Y;
+    if(a>0)
+        b2='1';
+    else
+        b2='0';
+
+    a=X-Xmax;
+    if(a>0)
+        b3='1';
+    else
+        b3='0';
+
+    a=Xmin-X;
+    if(a>0)
+        b4='1';
+    else
+        b4='0';
+
+    code=b1+b2+b3+b4;
+
+    cout<<c<<endl;
+
+}
+
+
+void candidate(int x1,int y1, int x2, int y2, int Xmin, int Ymin, int Xmax, int Ymax){
+    RegionCode( x1, y1,Xmin, Ymin, Xmax, Ymax);
+
+    /// TODO :  here!
+
+}
+
+
 int main(){
     int xm,ym,xc,yc;
     int gm=DETECT,gd;
@@ -79,7 +125,7 @@ int main(){
     cin>>Xmin>>Ymin>>Xmax>>Ymax;
 
     window(Xmin, Ymin, Xmax, Ymax, xm, ym);
-
+    int X=-20,Y=-50;
 
 
 
