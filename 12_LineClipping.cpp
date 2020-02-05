@@ -96,16 +96,35 @@ void RegionCode(int X, int Y, int Xmin, int Ymin, int Xmax, int Ymax){
         b4='0';
 
     code=b1+b2+b3+b4;
-
+    istringstream("code") >> c; ///TODO:string to boolean
     cout<<c<<endl;
+
+    return c;
 
 }
 
 
 void candidate(int x1,int y1, int x2, int y2, int Xmin, int Ymin, int Xmax, int Ymax){
-    RegionCode( x1, y1,Xmin, Ymin, Xmax, Ymax);
+    bool a,b;
+    a = RegionCode( x1, y1,Xmin, Ymin, Xmax, Ymax);
+    b = RegionCode( x2, y2,Xmin, Ymin, Xmax, Ymax);
 
-    /// TODO :  here!
+    if(a==0&&b==0){
+        cout<"Visible"<<endl;
+    }
+    else
+    {
+        if(a and b==0)
+        {
+                   cout<"Candidate"<<endl;
+                   ///TODO: clip. then line draw
+
+        }
+        else
+        {
+                    cout<" NOT Visible"<<endl;
+        }
+    }
 
 }
 
@@ -125,8 +144,8 @@ int main(){
     cin>>Xmin>>Ymin>>Xmax>>Ymax;
 
     window(Xmin, Ymin, Xmax, Ymax, xm, ym);
-    int X=-20,Y=-50;
-
+    int X=-50,Y=-50;
+    RegionCode( X, Y,Xmin, Ymin, Xmax, Ymax);
 
 
     getch();
