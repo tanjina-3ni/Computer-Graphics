@@ -12,7 +12,7 @@ int main(){
     line(0,ym,2*xm,ym);///x axis
     line(xm,0,xm,2*ym);///y axis
 
-    int x1=150,y1=10,x2=80,y2=200;
+    int x1=15,y1=10,x2=15,y2=200;
     int x,y,dx,dy,w,z,p;
 
     dx = x2-x1;
@@ -41,7 +41,7 @@ int main(){
     else{
             do{
                 putpixel(xm+x,ym-y,YELLOW);
-                if(p<0){
+                if(p>0){
                     p=p+z;
                     y=y+1;///changed here
                 }
