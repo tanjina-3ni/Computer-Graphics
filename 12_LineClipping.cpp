@@ -34,7 +34,7 @@ int x,y,dx,dy,w,z,p;
     else{
             do{
                 putpixel(xm+x,ym-y,YELLOW);
-                if(p<0){
+                if(p>0){
                     p=p+z;
                     y=y+1;///changed here
                 }
@@ -45,19 +45,23 @@ int x,y,dx,dy,w,z,p;
                 }
             }while(y<=y2);///changed here
         }
-          getch();
+
 }
 
 
 void window(int Xmin, int Ymin, int Xmax, int Ymax, int xm, int ym){
-    /*BresenhamLine(Xmin,Ymin,Xmax,Ymin,xm,ym);
+
     BresenhamLine(Xmin,Ymin,Xmax,Ymin,xm,ym);
+
+    BresenhamLine(Xmin,Ymin,Xmin,Ymax,xm,ym);
+
     BresenhamLine(Xmax,Ymin,Xmax,Ymax,xm,ym);
-    BresenhamLine(Xmin,Ymax,Xmax,Ymax,xm,ym);*/
-    line(Xmin,Ymin,Xmax,Ymin);
+
+    BresenhamLine(Xmin,Ymax,Xmax,Ymax,xm,ym);
+    /*line(Xmin,Ymin,Xmax,Ymin);
     line(Xmin,Ymin,Xmin,Ymax);
     line(Xmax,Ymin,Xmax,Ymax);
-    line(Xmin,Ymax,Xmax,Ymax);
+    line(Xmin,Ymax,Xmax,Ymax);*/
 }
 
 int main(){
