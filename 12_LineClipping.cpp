@@ -5,7 +5,6 @@ using namespace std;
 
 
 
-
 void BresenhamLine(int x1,int y1,int x2,int y2,int xm, int ym){
 int x,y,dx,dy,w,z,p;
 
@@ -14,10 +13,11 @@ int x,y,dx,dy,w,z,p;
 
             w=2*dx;
             z=2*dy;
-            p=z-dx;
+
             x=x1;
             y=y1;
     if(dx>dy){
+            p=z-dx;
             do{
                 putpixel(xm+x,ym-y,YELLOW);
                 if(p<0){
@@ -30,21 +30,25 @@ int x,y,dx,dy,w,z,p;
                     y=y+1;
                 }
             }while(x<=x2);
+          //cout<<"m<1 "<<endl;
     }
     else{
+            p=w-dy;
             do{
                 putpixel(xm+x,ym-y,YELLOW);
-                if(p>0){
-                    p=p+z;
+                if(p<0){///changed here
+                    p=p+w;
                     y=y+1;///changed here
                 }
                 else{
-                    p=p+z-w;
+                    p=p+w-z;
                     x=x+1;
                     y=y+1;
                 }
             }while(y<=y2);///changed here
-        }
+        //cout<<"m>1 "<<endl;
+    }
+
 
 }
 
