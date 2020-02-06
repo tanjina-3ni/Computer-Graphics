@@ -69,70 +69,57 @@ void window(int Xmin, int Ymin, int Xmax, int Ymax, int xm, int ym){
 }
 
 
-int calculateAND(int a1,int b1,int a2,int b2,int a3,int b3,int a4,int b4){
-    int flag=0;
-    if((a1&b1)==0 && (a2&b2)==0 && (a3&b3)==0 && (a4&b4)==0)
-    {
-        cout<<"Candidate"<<endl;
-        flag=1;
-    }
-    else
-    {
-        cout<<"Not Visible"<<endl;
-    }
-    return(flag);
-}
 
 
 int RegionCode(int x1, int y1, int x2, int y2, int Xmin, int Ymin, int Xmax, int Ymax){
 
-    int b1,b2,b3,b4,a1,a2,a3,a4,flag;
+    int b1,b2,b3,b4,a1,a2,a3,a4,flag=0;
     int a;
     a=y1-Ymax;
-    if(a>0)
-        b1=1;
-    else
+    if(a<0)
         b1=0;
+    else
+        b1=1;
 
     a=Ymin-y1;
-    if(a>0)
+    if(a>=0)
         b2=1;
     else
         b2=0;
 
     a=x1-Xmax;
-    if(a>0)
+    if(a>=0)
         b3=1;
     else
         b3=0;
 
     a=Xmin-x1;
-    if(a>0)
+    if(a>=0)
         b4=1;
     else
         b4=0;
        //x2 y2
 
     a=y2-Ymax;
-    if(a>0)
+    if(a>=0)
         a1=1;
     else
         a1=0;
 
     a=Ymin-y2;
-    if(a>0)
+    if(a>=0)
         a2=1;
     else
         a2=0;
 
     a=x2-Xmax;
-    if(a>0)
+    if(a>=0)
         a3=1;
     else
         a3=0;
 
     a=Xmin-x2;
-    if(a>0)
+    if(a>=0)
         a4=1;
     else
         a4=0;
@@ -142,41 +129,27 @@ int RegionCode(int x1, int y1, int x2, int y2, int Xmin, int Ymin, int Xmax, int
 
     //stringstream geek(code);
     //geek>>c; ///TODO:string to boolean
-    //cout<<c<<endl;
+    cout<<endl<<"Region Code:"<<endl<<"b1 b2 b3 b4"<<"  "<<b1<<b2<<b3<<b4<<endl;
+    cout<<"a1 a2 a3 a4"<<"  "<<a1<<a2<<a3<<a4<<endl;
+
 
     if(a1==0 && b1==0 &&a2==0 &&b2==0 &&a3==0 &&b3==0 &&a4==0 &&b4==0 )
         cout<<"Visible"<<endl;
+    else if((a1&b1)==0 && (a2&b2)==0 && (a3&b3)==0 && (a4&b4)==0)
+            {
+                cout<<"Candidate"<<endl;
+                flag=1;
+            }
     else
-        flag=calculateAND(a1,b1,a2,b2,a3,b3,a4,b4);
+            {
+                cout<<"Not Visible"<<endl;
+            }
 
-
+ return(flag);
 }
 
-
-/*void candidate(int x1,int y1, int x2, int y2, int Xmin, int Ymin, int Xmax, int Ymax){
-    bool a,b;
-    a = RegionCode( x1, y1,Xmin, Ymin, Xmax, Ymax);
-    b = RegionCode( x2, y2,Xmin, Ymin, Xmax, Ymax);
-
-    if(a==0&&b==0){
-        cout<"Visible"<<endl;
-    }
-    else
-    {
-        if(a and b==0)
-        {
-                   cout<"Candidate"<<endl;
-                   ///TODO: clip. then line draw
-
-        }
-        else
-        {
-                    cout<" NOT Visible"<<endl;
-        }
-    }
-
+/*void ClipLine(){
 }*/
-
 
 int main(){
     int xm,ym,xc,yc;
@@ -189,7 +162,7 @@ int main(){
     line(xm,0,xm,2*ym);
 
     int Xmax, Xmin, Ymax, Ymin;
-    int x1,x2,y1,y2;
+    int x1,x2,y1,y2,flag;
     cout<<"Enter Xmin Ymin Xmax Ymax"<<endl;
     cin>>Xmin>>Ymin>>Xmax>>Ymax;
 
@@ -199,7 +172,13 @@ int main(){
     cout<<"Enter end points of Line please"<<endl<<"x1,y1,x2,y2"<<endl;
    cin>>x1>>y1>>x2>>y2;
     BresenhamLine(x1,y1,x2,y2,xm,ym);
-    RegionCode(x1, y1, x2, y2, Xmin, Ymin, Xmax, Ymax);
+    flag=RegionCode(x1, y1, x2, y2, Xmin, Ymin, Xmax, Ymax);
+    //cout<<flag<<endl;
+
+    /*if(flag==1)
+    {
+        ClipLine(x1,y1,x2,y2);
+    }*/
 
 
     getch();
