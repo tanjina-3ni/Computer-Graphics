@@ -12,7 +12,7 @@ int main(){
     line(0,ym,2*xm,ym);///x axis
     line(xm,0,xm,2*ym);///y axis
 
-    int x1=15,y1=10,x2=15,y2=200;
+    int x1=-15,y1=-15,x2=15,y2=150;
     int x,y,dx,dy,w,z,p;
 
     dx = x2-x1;
@@ -20,10 +20,11 @@ int main(){
 
             w=2*dx;
             z=2*dy;
-            p=z-dx;
+
             x=x1;
             y=y1;
     if(dx>dy){
+            p=z-dx;
             do{
                 putpixel(xm+x,ym-y,YELLOW);
                 if(p<0){
@@ -39,14 +40,15 @@ int main(){
           cout<<"m<1 "<<endl;
     }
     else{
+            p=w-dy;
             do{
                 putpixel(xm+x,ym-y,YELLOW);
-                if(p>0){
-                    p=p+z;
+                if(p<0){///changed here
+                    p=p+w;
                     y=y+1;///changed here
                 }
                 else{
-                    p=p+z-w;
+                    p=p+w-z;
                     x=x+1;
                     y=y+1;
                 }
