@@ -9,48 +9,89 @@ void BresenhamLine(int x1,int y1,int x2,int y2){
     int xm,ym;
     xm=getmaxx()/2;
     ym=getmaxy()/2;
-int x,y,dx,dy,w,z,p;
-
-    dx = x2-x1;
-    dy = y2-y1;
-
-            w=2*dx;
-            z=2*dy;
-
-            x=x1;
-            y=y1;
-    if(dx>dy){
-            p=z-dx;
-            do{
-                putpixel(xm+x,ym-y,YELLOW);
-                if(p<0){
-                    p=p+z;
-                    x=x+1;
-                }
-                else{
-                    p=p+z-w;
-                    x=x+1;
-                    y=y+1;
-                }
-            }while(x<=x2);
-          //cout<<"m<1 "<<endl;
+int x,y,dx,dy,dx1,dy1,px,py,xe,ye,i,c=1;
+ dx=x2-x1;
+ dy=y2-y1;
+ dx1=fabs(dx);
+ dy1=fabs(dy);
+ px=2*dy1-dx1;
+ py=2*dx1-dy1;
+ if(dy1<=dx1)
+ {
+  if(dx>=0)
+  {
+   x=x1;
+   y=y1;
+   xe=x2;
+  }
+  else
+  {
+   x=x2;
+   y=y2;
+   xe=x1;
+  }
+  putpixel(x+xm,ym-y,YELLOW);
+  for(i=0;x<xe;i++)
+  {
+   x=x+1;
+   if(px<0)
+   {
+    px=px+2*dy1;
+   }
+   else
+   {
+    if((dx<0 && dy<0) || (dx>0 && dy>0))
+        {
+     y=y+1;
     }
-    else{
-            p=w-dy;
-            do{
-                putpixel(xm+x,ym-y,YELLOW);
-                if(p<0){///changed here
-                    p=p+w;
-                    y=y+1;///changed here
-                }
-                else{
-                    p=p+w-z;
-                    x=x+1;
-                    y=y+1;
-                }
-            }while(y<=y2);///changed here
-        //cout<<"m>1 "<<endl;
+    else
+    {
+     y=y-1;
     }
+    px=px+2*(dy1-dx1);
+   }
+   delay(0);
+   putpixel(x+xm,ym-y,YELLOW);
+  }
+ }
+ else
+ {
+  if(dy>=0)
+  {
+   x=x1;
+   y=y1;
+   ye=y2;
+  }
+  else
+  {
+   x=x2;
+   y=y2;
+   ye=y1;
+  }
+  putpixel(x+xm,ym-y,YELLOW);
+  for(i=0;y<ye;i++)
+  {
+   y=y+1;
+   if(py<=0)
+   {
+    py=py+2*dx1;
+   }
+   else
+   {
+    if((dx<0 && dy<0) || (dx>0 && dy>0))
+    {
+     x=x+1;
+    }
+    else
+    {
+     x=x-1;
+    }
+    py=py+2*(dx1-dy1);
+   }
+   delay(0);
+   putpixel(x+xm,ym-y,YELLOW);
+  }
+ }
 
 
 }
@@ -174,7 +215,7 @@ int RegionCode(int x1, int y1, int x2, int y2, int Xmin, int Ymin, int Xmax, int
             {
                 cout<<"Candidate"<<endl;
 
-                if(b1==1||b2==1||b3==1||b4==1){
+                /*if(b1==1||b2==1||b3==1||b4==1){
                         if(b1==1||b2==1){
                         flag=0;
                         x=0;
@@ -205,7 +246,7 @@ int RegionCode(int x1, int y1, int x2, int y2, int Xmin, int Ymin, int Xmax, int
                         cout<<"Y"<<Y<<endl;
                     }
 
-                }
+                }*/
                 //cout<<x<<" "<<y<<" "<<X<<" "<<Y<<endl;
 
                // BresenhamLine(x,y,X,Y);
