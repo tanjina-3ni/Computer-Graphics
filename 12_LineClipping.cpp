@@ -123,7 +123,7 @@ int ClipLine(int x, int y,int x1,int y1,int x2,int y2,int f ){
     }
     else{
         x=0;
-        x=x1+int((y-y1)/m);
+        x=x1+((y-y1)/m);
         return(x);
     }
 
@@ -133,7 +133,7 @@ int ClipLine(int x, int y,int x1,int y1,int x2,int y2,int f ){
 int RegionCode(int x1, int y1, int x2, int y2, int Xmin, int Ymin, int Xmax, int Ymax){
 
     int b1,b2,b3,b4,a1,a2,a3,a4,flag=0;
-    int a,x,y,X,Y;
+    int a,x,y,X,Y,x3,y3;
     a=y1-Ymax;
     if(a>=0){
         b1=1;
@@ -215,41 +215,6 @@ int RegionCode(int x1, int y1, int x2, int y2, int Xmin, int Ymin, int Xmax, int
             {
                 cout<<"Candidate"<<endl;
 
-                /*if(b1==1||b2==1||b3==1||b4==1){
-                        if(b1==1||b2==1){
-                        flag=0;
-                        x=0;
-                        x = ClipLine(x,y,x1,y1,x2,y2,flag);
-                        cout<<"x"<<x<<endl;
-                    }
-                        else if(b2==1||b3==1){
-                            flag=1;
-                            y=0;
-                            y = ClipLine(x,y,x1,y1,x2,y2,flag);
-                            cout<<"y"<<y<<endl;
-                }
-                }
-
-
-                else if(a1==1||a2==1||a3==1||a4==1)
-                {
-                    if(a1==1||a2==1){
-                    flag=0;
-                    X=0;
-                    X = ClipLine(X,Y,x1,y1,x2,y2,flag);
-                    cout<<"X"<<X<<endl;
-                    }
-                    else if(a3==1||a4==1){
-                        flag=1;
-                        Y=0;
-                        Y = ClipLine(X,Y,x1,y1,x2,y2,flag);
-                        cout<<"Y"<<Y<<endl;
-                    }
-
-                }*/
-                //cout<<x<<" "<<y<<" "<<X<<" "<<Y<<endl;
-
-               // BresenhamLine(x,y,X,Y);
 
 
             }
@@ -284,6 +249,7 @@ int main(){
     cout<<"Enter end points of Line please"<<endl<<"x1,y1,x2,y2"<<endl;
    cin>>x1>>y1>>x2>>y2;
     BresenhamLine(x1,y1,x2,y2);
+
     RegionCode(x1, y1, x2, y2, Xmin, Ymin, Xmax, Ymax);
     //cout<<flag<<endl;
 
