@@ -114,16 +114,16 @@ void window(int Xmin, int Ymin, int Xmax, int Ymax){
 
 
 int ClipLine(int x, int y,int x1,int y1,int x2,int y2,int f ){
-    int m;
-    m=int((y2-y1)/(x2-x1));
+    float m;
+    m=float((y2-y1)/(x2-x1));
     if (f==1){
-        y=0;
+
         y=y1+(m*(x-x1));
         return(y);
     }
     else{
-        x=0;
-        x=x1+((y-y1)/m);
+
+        x=int(x1+((y-y1)/m));
         return(x);
     }
 
@@ -133,7 +133,7 @@ int ClipLine(int x, int y,int x1,int y1,int x2,int y2,int f ){
 int RegionCode(int x1, int y1, int x2, int y2, int Xmin, int Ymin, int Xmax, int Ymax){
 
     int b1,b2,b3,b4,a1,a2,a3,a4,flag=0;
-    int a,x,y,X,Y,x3,y3;
+    int a,x=0,y=0,X=0,Y=0,x3,y3;
     a=y1-Ymax;
     if(a>=0){
         b1=1;
@@ -214,6 +214,43 @@ int RegionCode(int x1, int y1, int x2, int y2, int Xmin, int Ymin, int Xmax, int
     else if((a1&b1)==0 && (a2&b2)==0 && (a3&b3)==0 && (a4&b4)==0)
             {
                 cout<<"Candidate"<<endl;
+                //cout<<"X"<<X<<"x"<<x<<"Y"<<Y<<"y"<<y;
+                if(a1==0&&a2==0&&a3==0&&a4==0){
+                    x=x2;
+                    y=y2;
+                    if(b1==1||b2==1){
+                        Y=y;
+                        X=ClipLine(0,y,x1,y1,x2,y2,0);
+                        //cout<<Y<<endl;
+                        BresenhamLine(x,y,X,Y);
+                    }
+                    //BresenhamLine(x,y,X,Y);
+                    else if(b3==1||b4==1){
+                        X=x;
+                        Y=ClipLine(x,0,x1,y1,x2,y2,1);
+                        BresenhamLine(x,y,X,Y);
+                    }
+                    //BresenhamLine(x,y,X,Y);
+
+
+                }
+                else if(b1==0&&b2==0&&b3==0&&b4==0){
+                    x=x1;
+                    y=y1;
+                    if(a1==1||a2==1){
+                        Y=Y;
+                        X=ClipLine(0,Y,x1,y1,x2,y2,0);
+                        //cout<<X<<Y<<endl;
+                        BresenhamLine(x,y,X,Y);
+                    }
+                    //BresenhamLine(x,y,X,Y);
+                    else if(a3==1||a4==1){
+                        X=X;
+                        Y=ClipLine(X,0,x1,y1,x2,y2,1);
+                        BresenhamLine(x,y,X,Y);
+                    }
+
+                }
 
 
 
@@ -240,6 +277,7 @@ int main(){
 
     int Xmax, Xmin, Ymax, Ymin;
     int x1,x2,y1,y2,flag;
+    int x=0,y=0,X=0,Y=0;
     cout<<"Enter Xmin Ymin Xmax Ymax"<<endl;
     cin>>Xmin>>Ymin>>Xmax>>Ymax;
 
@@ -249,9 +287,14 @@ int main(){
     cout<<"Enter end points of Line please"<<endl<<"x1,y1,x2,y2"<<endl;
    cin>>x1>>y1>>x2>>y2;
     BresenhamLine(x1,y1,x2,y2);
-
+    delay(1000);
+    cleardevice();
+    window(Xmin, Ymin, Xmax, Ymax);
     RegionCode(x1, y1, x2, y2, Xmin, Ymin, Xmax, Ymax);
     //cout<<flag<<endl;
+
+
+    //cout<<x<<y<<X<<Y;
 
     getch();
     closegraph();
